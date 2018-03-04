@@ -2,6 +2,9 @@ package com.ltsllc.commons.util;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.StringReader;
+
 public class TestHexConveter {
     @Test
     public void positiveToHighNibble () {
@@ -73,5 +76,32 @@ public class TestHexConveter {
         int expected = 10;
         int actual = HexConverter.toNibble(c);
         assert(expected == actual);
+    }
+
+    @Test
+    public void positiveToHexString () {
+        int i = 0xAA;
+        String expected = "AA";
+        String actual = HexConverter.toHexString(i);
+        assert (expected.equals(actual));
+    }
+
+    public byte[] toByteArray(int[] ia) {
+        byte[] ba = new byte[ia.length];
+        for (int i = 0; i < ia.length; i++) {
+            ba[i] = (byte) ia[i];
+        }
+
+        return ba;
+    }
+
+    @Test
+    public void positiveToByteArray2 () throws IOException {
+        String string = "AABBCCDDEEFF";
+        StringReader stringReader = new StringReader(string);
+        int[] expected1 = { 170, 187, 204, 221, 238, 255};
+        byte[] expected = toByteArray(expected1);
+        byte[] actual = HexConverter.toByteArray(stringReader);
+        assert (byteArraysAreEqual(expected, actual));
     }
 }

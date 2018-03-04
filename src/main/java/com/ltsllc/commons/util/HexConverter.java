@@ -41,12 +41,11 @@ public class HexConverter {
         return stringBuilder.toString();
     }
 
-    public static String toHexString (byte b) {
+    public static String toHexString (int b) {
         StringBuilder stringBuilder = new StringBuilder();
-        int i = b;
-        stringBuilder.append(toHighNibble(i));
-        i = i & 0xF;
-        stringBuilder.append(chars[i]);
+        stringBuilder.append(chars[toHighNibble(b)]);
+        b = b & 0xF;
+        stringBuilder.append(chars[b]);
 
         return stringBuilder.toString();
     }
