@@ -96,4 +96,9 @@ public class ImprovedRandom {
 
         return value;
     }
+
+    public <E> E next (E[] items) {
+        int index = nextIndex(items.length);
+        return items[index];
+    }
 }

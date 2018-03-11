@@ -16,7 +16,7 @@ import com.ltsllc.commons.commadline.CommandLine;
  * <p>
  *     An instance of this type must
  *     <ul>
- *         <li>have the command is the first argument</li>
+ *         <li>have the command as the first argument</li>
  *     </ul>
  * </p>
  * <p>
@@ -25,7 +25,7 @@ import com.ltsllc.commons.commadline.CommandLine;
  *     and them performs the command.
  * </p>
  */
-abstract public class GitStyle {
+abstract public class GitStyle extends Application {
     public enum Command {
         Unknown(-1),
         LAST(0);
@@ -60,7 +60,7 @@ abstract public class GitStyle {
      * Determine which command the user wants to run.
      *
      * <p>
-     *     Convert a string to a Command object whose index reflects the command that the user wants to run.
+     *     Convert a string to a SubCommand object whose index reflects the command that the user wants to run.
      * </p>
      *
      * @param string The string to convert.
@@ -68,8 +68,6 @@ abstract public class GitStyle {
      */
     abstract public Command toCommand(String string);
     abstract public CommandLine toCommandLineParser(Command command);
-    abstract public String getName ();
-    abstract public String getUsageString ();
     abstract public void execute ();
 
     public void usage() {
@@ -83,7 +81,7 @@ abstract public class GitStyle {
         System.exit(1);
     }
 
-    public void main (String[] argv) {
+    public void execute (String[] argv) {
         if (argv.length < 1) {
             usage();
         } else {
