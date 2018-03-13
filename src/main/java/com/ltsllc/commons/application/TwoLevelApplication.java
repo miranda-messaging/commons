@@ -189,7 +189,7 @@ abstract public class TwoLevelApplication {
 
         Objects object = toObject(argv[0]);
 
-        if (object == Objects.Unknown) {
+        if (object == Objects.Unknown || null == object) {
             System.err.println ("Unrecognized object: " + argv[0]);
             printUsageAndExit(2);
         }
@@ -202,7 +202,7 @@ abstract public class TwoLevelApplication {
 
         Predicates predicate = toPredicate(argv[1]);
 
-        if (predicate == Predicates.Unknown) {
+        if (predicate == Predicates.Unknown || null == predicate) {
             System.err.println("The String, " + argv[1] + " is not recognized for the object " + argv[0]);
             printUsageAndExit(3);
         }
