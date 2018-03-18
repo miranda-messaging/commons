@@ -19,6 +19,18 @@ package com.ltsllc.commons.application;
 
 import com.ltsllc.commons.commadline.CommandLine;
 
+import java.util.Scanner;
+
 abstract public class Option {
     abstract public void execute (CommandLine commandLine);
+
+    public String getLine (Scanner scanner, String defaultValue) {
+        String input = scanner.nextLine();
+
+        if (input.equals("")) {
+            return defaultValue;
+        } else {
+            return input;
+        }
+    }
 }
