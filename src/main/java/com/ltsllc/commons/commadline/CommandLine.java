@@ -19,7 +19,7 @@ package com.ltsllc.commons.commadline;
 import java.util.Properties;
 
 abstract public class CommandLine {
-    abstract public Switches toSwitch (String argument) throws CommandException;
+    abstract public Switches toSwitch (String argument) throws CommandLineException;
     abstract public String getUsageString();
 
     public enum Switches {
@@ -49,6 +49,10 @@ abstract public class CommandLine {
     public CommandLine (String[] argv) {
         this.argv = argv;
         this.argIndex = 0;
+    }
+
+    public CommandLine () {
+        argIndex = 0;
     }
 
     public int getArgIndex() {
@@ -102,7 +106,10 @@ abstract public class CommandLine {
         return new Properties();
     }
 
-    public void parse () throws CommandException {
+    public void parse (String[] argv) throws CommandLineException {
+        setArgv(argv);
+        setArgIndex(0);
+
         while (hasMoreArgs()) {
             Switches aSwitch = toSwitch(getArg());
             processSwitch(aSwitch);
@@ -119,9 +126,9 @@ abstract public class CommandLine {
         return -1;
     }
 
-    public void processSwitch(Switches aSwitch) throws CommandException {
+    public void processSwitch(Switches aSwitch) throws CommandLineException {
         String message = "The argument, " + getArg() + ", is unrecognized";
-        throw new CommandException(message);
+        throw new CommandLineException(message);
     }
 
     public void printErrorAndUsageAndExit (String message, int status) {

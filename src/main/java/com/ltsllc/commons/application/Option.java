@@ -19,10 +19,11 @@ package com.ltsllc.commons.application;
 
 import com.ltsllc.commons.commadline.CommandLine;
 
+import java.util.Map;
 import java.util.Scanner;
 
 abstract public class Option {
-    abstract public void execute (CommandLine commandLine);
+    abstract public void execute (Map<String, Object> context);
 
     public String getLine (Scanner scanner, String defaultValue) {
         String input = scanner.nextLine();
