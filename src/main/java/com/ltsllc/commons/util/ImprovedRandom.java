@@ -81,8 +81,17 @@ public class ImprovedRandom {
         return buffer[0];
     }
 
+    public int nextInt () {
+        return random.nextInt();
+    }
+
     public int nextInt (int lessThan) {
         return random.nextInt(lessThan);
+    }
+
+    public int nextNonNegativeInteger () {
+        int i = nextInt();
+        return i < 0 ? i * -1 : i;
     }
 
     public long nextNonNegativeLong () {
@@ -100,5 +109,16 @@ public class ImprovedRandom {
     public <E> E next (E[] items) {
         int index = nextIndex(items.length);
         return items[index];
+    }
+
+    public String randomString (int length) {
+        byte[] bytes = new byte[length];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+
+    public boolean nextBoolean () {
+        int i = nextInt();
+        return i % 2 == 0;
     }
 }

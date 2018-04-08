@@ -17,8 +17,14 @@
 package com.ltsllc.commons.util;
 
 
+import com.ltsllc.clcl.EncryptionException;
+import com.ltsllc.clcl.JavaKeyStore;
+
 import java.io.*;
 import java.net.Socket;
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -159,10 +165,6 @@ public class Utils {
         }
     }
 
-
-
-
-
     public static String readAsString(String filename) throws IOException {
         File file = new File(filename);
         if (!file.exists()) {
@@ -186,17 +188,6 @@ public class Utils {
 
         return stringWriter.toString();
     }
-
-//    public static byte[] readBytes(ServletInputStream inputStream) throws IOException {
-//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        int b = inputStream.read();
-//        while (-1 != b) {
-//            byteArrayOutputStream.write(b);
-//            b = inputStream.read();
-//        }
-//
-//        return byteArrayOutputStream.toByteArray();
-//    }
 
     public static String toStacktrace(Throwable t) {
         PrintWriter printWriter = null;
@@ -274,5 +265,15 @@ public class Utils {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static List copy (List source) {
+        List dest = new ArrayList(source.size());
+        source.forEach(item -> dest.add(item));
+        return dest;
+    }
+
+    public static KeyStore loadKeyStore(String filename, String password) throws EncryptionException {
+        return JavaKeyStore.loadJsKeyStore(filename, password);
     }
 }

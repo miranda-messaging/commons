@@ -95,4 +95,5 @@ public class HexConverter {
         else
             throw new IllegalArgumentException("invalid hex character: " + c);
     }
+
 }
